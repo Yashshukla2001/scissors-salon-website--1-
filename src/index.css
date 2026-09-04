@@ -1,0 +1,178 @@
+@import "tailwindcss";
+
+@theme {
+  /* ---- Color system ---- */
+  --color-charcoal: #14110f;
+  --color-charcoal-2: #1c1713;
+  --color-ink: #211c17;
+  --color-ivory: #f7f2e7;
+  --color-ivory-2: #efe6d3;
+  --color-champagne: #c8a05c;
+  --color-champagne-light: #e3c98e;
+  --color-blush: #e6c8bc;
+  --color-blush-2: #d9ab9c;
+  --color-wine: #6d2027;
+  --color-wine-light: #8a3038;
+
+  /* ---- Type ---- */
+  --font-display: "Fraunces", "Times New Roman", serif;
+  --font-sans: "Manrope", ui-sans-serif, system-ui, sans-serif;
+  --font-hand: "Caveat", cursive;
+
+  /* ---- Easing ---- */
+  --ease-luxe: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@layer base {
+  * {
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: auto;
+    background: var(--color-charcoal);
+  }
+
+  body {
+    font-family: var(--font-sans);
+    background: var(--color-charcoal);
+    color: var(--color-ivory);
+    -webkit-font-smoothing: antialiased;
+    overflow-x: clip;
+  }
+
+  ::selection {
+    background: var(--color-champagne);
+    color: var(--color-charcoal);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-champagne);
+    outline-offset: 3px;
+  }
+
+  h1, h2, h3, h4 {
+    font-family: var(--font-display);
+    letter-spacing: -0.01em;
+  }
+
+  .font-display {
+    font-family: var(--font-display);
+  }
+
+  .font-sans {
+    font-family: var(--font-sans);
+  }
+
+  .font-hand {
+    font-family: var(--font-hand);
+  }
+
+  .eyebrow {
+    font-family: var(--font-sans);
+    font-weight: 600;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    font-size: 0.72rem;
+  }
+
+  .hairline {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, currentColor, transparent);
+    opacity: 0.35;
+  }
+
+  @keyframes ping-slow {
+    0% { transform: scale(1); opacity: 0.55; }
+    80%, 100% { transform: scale(1.7); opacity: 0; }
+  }
+  .animate-ping-slow {
+    animation: ping-slow 2.4s cubic-bezier(0, 0, 0.2, 1) infinite;
+  }
+
+  @keyframes marquee-scroll {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+  .marquee-track {
+    animation: marquee-scroll 32s linear infinite;
+  }
+  .marquee-track-slow {
+    animation: marquee-scroll 60s linear infinite;
+  }
+
+  @keyframes cue-pulse {
+    0%, 100% { opacity: 0.35; transform: scale(1); }
+    50% { opacity: 0.75; transform: scale(1.15); }
+  }
+  .animate-cue-pulse {
+    animation: cue-pulse 2.2s ease-in-out infinite;
+  }
+
+  @keyframes dust-drift {
+    0% { transform: translate(0, 0); opacity: 0; }
+    15% { opacity: 0.5; }
+    85% { opacity: 0.35; }
+    100% { transform: translate(var(--dust-x, 12px), -46px); opacity: 0; }
+  }
+  .animate-dust-drift {
+    animation: dust-drift linear infinite;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+@layer utilities {
+  .text-stroke-gold {
+    -webkit-text-stroke: 1px var(--color-champagne);
+    color: transparent;
+  }
+
+  .bg-noise {
+    background-image: radial-gradient(circle at 20% 20%, rgba(200,160,92,0.06), transparent 40%),
+      radial-gradient(circle at 80% 60%, rgba(230,200,188,0.05), transparent 45%);
+  }
+
+  .clip-diagonal {
+    clip-path: polygon(0 4%, 100% 0, 100% 96%, 0 100%);
+  }
+
+  .scrollbar-hide {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+
+  .field-select {
+    width: 100%;
+    border-radius: 0.75rem;
+    border: 1px solid rgba(33, 28, 23, 0.15);
+    background: white;
+    padding: 0.7rem 1rem;
+    font-family: var(--font-sans);
+    font-size: 0.9rem;
+    color: var(--color-charcoal);
+    outline: none;
+    transition: border-color 0.2s ease;
+  }
+  .field-select:focus {
+    border-color: var(--color-wine);
+  }
+
+  @keyframes fade-up {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .animate-fade-up {
+    animation: fade-up 0.55s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+}
