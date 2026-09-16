@@ -60,7 +60,18 @@ export function artistBookingLink(artistName: string, serviceName?: string): str
     "Please help me confirm my appointment.",
   ]);
 }
-
+/** Booking one specific priced menu item directly from the services browser. */
+export function serviceItemBookingLink(categoryName: string, itemName: string, price?: string): string {
+  return buildLink([
+    `Hi ${businessInfo.name} 👋`,
+    "I'd like to book this:",
+    "",
+    `Service: ${categoryName} — ${itemName}`,
+    price ? `Price: ${price}` : undefined,
+    "",
+    "Please confirm availability and my appointment.",
+  ]);
+}
 export type ContactFormDetails = {
   name?: string;
   phone?: string;

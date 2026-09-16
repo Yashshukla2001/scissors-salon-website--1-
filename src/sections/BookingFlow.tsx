@@ -1,11 +1,17 @@
 import { useState } from "react";
 import { WhatsAppGlyph } from "@/components/icons";
-import { services } from "@/config/services";
+import { serviceMenu } from "@/config/services";
 import { artists } from "@/config/artists";
 import { fullBookingLink, type BookingDetails } from "@/utils/whatsapp";
 
 const TIMES = ["10:00 AM", "11:30 AM", "1:00 PM", "3:00 PM", "4:30 PM", "6:00 PM", "7:30 PM"];
 
+// One flat, deduped list of category names across every audience group,
+// for this general "what do you need" dropdown (exact pricing/sub-service
+// picking happens in the main Services section browser).
+const allServiceNames = Array.from(
+  new Set(serviceMenu.flatMap((group) => group.categories.map((c) => c.name)))
+);
 export default function BookingFlow() {
   const [values, setValues] = useState<BookingDetails>({ artist: "No Preference" });
 
@@ -37,9 +43,9 @@ export default function BookingFlow() {
                   <option value="" disabled>
                     Choose a service
                   </option>
-                  {services.map((s) => (
-                    <option key={s.id} value={s.name}>
-                      {s.name}
+                                     {allServiceNames.map((name) => (
+                    <option key={name} value={name}>
+                      {name}
                     </option>
                   ))}
                 </select>
